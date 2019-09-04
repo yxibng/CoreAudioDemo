@@ -13,6 +13,8 @@
 		118DB9B8232004D900C421E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118DB9B7232004D900C421E0 /* Assets.xcassets */; };
 		118DB9BB232004D900C421E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 118DB9B9232004D900C421E0 /* LaunchScreen.storyboard */; };
 		118DB9BE232004D900C421E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 118DB9BD232004D900C421E0 /* main.m */; };
+		118DB9C62320050B00C421E0 /* AudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 118DB9C52320050B00C421E0 /* AudioRecorder.m */; };
+		118DB9C92320055E00C421E0 /* AudioSessionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 118DB9C82320055E00C421E0 /* AudioSessionTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,11 @@
 		118DB9BA232004D900C421E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		118DB9BC232004D900C421E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		118DB9BD232004D900C421E0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		118DB9C42320050B00C421E0 /* AudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioRecorder.h; sourceTree = "<group>"; };
+		118DB9C52320050B00C421E0 /* AudioRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioRecorder.m; sourceTree = "<group>"; };
+		118DB9C72320055E00C421E0 /* AudioSessionTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioSessionTool.h; sourceTree = "<group>"; };
+		118DB9C82320055E00C421E0 /* AudioSessionTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioSessionTool.m; sourceTree = "<group>"; };
+		118DB9CA2320058500C421E0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,11 +69,16 @@
 				118DB9AF232004D700C421E0 /* AppDelegate.m */,
 				118DB9B1232004D700C421E0 /* ViewController.h */,
 				118DB9B2232004D700C421E0 /* ViewController.m */,
+				118DB9C42320050B00C421E0 /* AudioRecorder.h */,
+				118DB9C52320050B00C421E0 /* AudioRecorder.m */,
 				118DB9B4232004D700C421E0 /* Main.storyboard */,
 				118DB9B7232004D900C421E0 /* Assets.xcassets */,
 				118DB9B9232004D900C421E0 /* LaunchScreen.storyboard */,
 				118DB9BC232004D900C421E0 /* Info.plist */,
 				118DB9BD232004D900C421E0 /* main.m */,
+				118DB9C72320055E00C421E0 /* AudioSessionTool.h */,
+				118DB9C82320055E00C421E0 /* AudioSessionTool.m */,
+				118DB9CA2320058500C421E0 /* Constants.h */,
 			);
 			path = CoreAudioDemos;
 			sourceTree = "<group>";
@@ -141,8 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				118DB9C92320055E00C421E0 /* AudioSessionTool.m in Sources */,
 				118DB9B3232004D700C421E0 /* ViewController.m in Sources */,
 				118DB9BE232004D900C421E0 /* main.m in Sources */,
+				118DB9C62320050B00C421E0 /* AudioRecorder.m in Sources */,
 				118DB9B0232004D700C421E0 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
