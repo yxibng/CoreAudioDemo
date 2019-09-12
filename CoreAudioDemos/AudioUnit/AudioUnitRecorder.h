@@ -10,8 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AudioUnitRecorder : NSObject
+static NSString *kPcmName = @"audio.pcm";
 
+static inline NSString *pcm_path(){
+   NSString *dir =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    return  [dir stringByAppendingPathComponent:kPcmName];
+    
+}
+
+@interface AudioUnitRecorder : NSObject
+- (void)startRecording;
+- (void)stopRecording;
 @end
 
 NS_ASSUME_NONNULL_END

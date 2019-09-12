@@ -17,15 +17,26 @@ static const AudioUnitElement kOutputBus = 0;
 static const double kAduioSampleRate = 44100.0;
 
 
-@implementation AudioUnitRecorder
+typedef struct AudioRecordFile {
+    AudioFileID file;
+    SInt64 inStartingByte;
+    BOOL running;
+} AudioRecordFile, *AudioRecordFilePointer;
 
+
+@implementation AudioUnitRecorder
 {
     AudioUnit _VoiceProcessingIOUnit;
+    AudioStreamBasicDescription _streamFormat;
+    AudioRecordFile _recordFile;
+    AudioRecordFilePointer _recordFilePointer;
 }
 
 
 - (void)dealloc
 {
+    [self stopRecording];
+    
     OSStatus status =  AudioComponentInstanceDispose(_VoiceProcessingIOUnit);
     _VoiceProcessingIOUnit = NULL;
     NSAssert(status == noErr, @"AudioComponentInstanceDispose error");
@@ -39,6 +50,30 @@ static const double kAduioSampleRate = 44100.0;
     }
     return self;
 }
+
+
+- (void)prepareAudioFileToRecord
+{
+    _recordFilePointer = &_recordFile;
+    NSURL *fileURL = [NSURL fileURLWithPath:pcm_path()];
+    OSStatus status = AudioFileCreateWithURL((__bridge CFURLRef)fileURL,
+                                             kAudioFileAIFFType,
+                                             &(_streamFormat),
+                                             kAudioFileFlags_EraseFile,
+                                             &_recordFile.file);
+    
+    NSAssert(status == noErr, @"AudioFileCreateWithURL error");
+    _recordFilePointer->inStartingByte = 0;
+    _recordFilePointer->running = YES;
+}
+
+- (void)closeAudioFile
+{
+    _recordFilePointer->running = NO;
+    OSStatus status = AudioFileClose(_recordFilePointer->file);
+    NSAssert(status == noErr, @"AudioFileClose error");
+}
+
 
 - (void)setup
 {
@@ -107,23 +142,21 @@ static const double kAduioSampleRate = 44100.0;
                                   sizeof(input));
 
     NSAssert(status == noErr, @"set input callback error");
-
-    //设置录音数据的格式
-    AudioStreamBasicDescription format = {0};
-    format.mSampleRate = kAduioSampleRate;
-    format.mFormatID = kAudioFormatLinearPCM;
-    format.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-    format.mFramesPerPacket = 1;
-    format.mChannelsPerFrame = 1;
-    format.mBitsPerChannel = 16;
-    format.mBytesPerPacket = 2;
-    format.mBytesPerFrame = 2;
+    
+    _streamFormat.mSampleRate = kAduioSampleRate;
+    _streamFormat.mFormatID = kAudioFormatLinearPCM;
+    _streamFormat.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+    _streamFormat.mFramesPerPacket = 1;
+    _streamFormat.mChannelsPerFrame = 1;
+    _streamFormat.mBitsPerChannel = 16;
+    _streamFormat.mBytesPerPacket = 2;
+    _streamFormat.mBytesPerFrame = 2;
 
     status = AudioUnitSetProperty(_VoiceProcessingIOUnit,
                                   kAudioUnitProperty_StreamFormat,
                                   kAudioUnitScope_Output,
                                   kInputBus,
-                                  &format,
+                                  &_streamFormat,
                                   sizeof(AudioStreamBasicDescription));
     
     NSAssert(status == noErr, @"set stream format error");
@@ -136,6 +169,8 @@ static const double kAduioSampleRate = 44100.0;
 {
     OSStatus status = AudioOutputUnitStart(_VoiceProcessingIOUnit);
     NSAssert(status == noErr, @"AudioOutputUnitStart error");
+    [self prepareAudioFileToRecord];
+
 }
 
 
@@ -165,9 +200,17 @@ OSStatus inputRenderCallback(void *inRefCon,
     // render input and check for error
     status = AudioUnitRender(recorder->_VoiceProcessingIOUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, &bufferList);
     
-    if (0 == status) {
-        //process buffer
+    if (status) {
+        return status;
     }
+    
+    uint32_t size = bufferList.mBuffers[0].mDataByteSize;
+    AudioRecordFilePointer recordFile = recorder->_recordFilePointer;
+    status = AudioFileWriteBytes(recordFile->file, FALSE, recordFile->inStartingByte, &size, bufferList.mBuffers[0].mData);
+    if (status) {
+        return status;
+    }
+    recordFile->inStartingByte += size;
 
     return noErr;
 }
