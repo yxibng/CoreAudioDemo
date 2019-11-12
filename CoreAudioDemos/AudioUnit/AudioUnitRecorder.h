@@ -29,13 +29,19 @@ typedef NS_ENUM(NSUInteger, AudioUnitStopReason) {
 @class AudioUnitRecorder;
 @protocol AudioUnitRecorderDelegate <NSObject>
 
+@optional
 - (void)audioRecorder:(AudioUnitRecorder *)recorder didStartWithError:(AudioUnitErrorCode)error;
+- (void)audioRecorder:(AudioUnitRecorder *)recorder didReceiveAudioData:(void *)auidoData length:(int)length;
 - (void)audioRecorder:(AudioUnitRecorder *)recorder didStopWithReason:(AudioUnitStopReason)reason;
 
 @end
 
 
 @interface AudioUnitRecorder : NSObject
+
+- (instancetype)initWithDelegate:(id<AudioUnitRecorderDelegate>)delegate;
+
+@property (nonatomic, weak) id<AudioUnitRecorderDelegate>delegate;
 
 
 - (void)startRecording;

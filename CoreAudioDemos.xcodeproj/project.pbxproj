@@ -20,6 +20,9 @@
 		860EB448232A2D9200AEF97C /* DrumsMonoSTP.aif in Resources */ = {isa = PBXBuildFile; fileRef = 860EB447232A2D9200AEF97C /* DrumsMonoSTP.aif */; };
 		8661982623289E9600E775D5 /* AudioUnitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8661982523289E9600E775D5 /* AudioUnitHelper.m */; };
 		86C890342322479700E70624 /* AudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C890332322479700E70624 /* AudioQueue.m */; };
+		86F449B1237AB76E00BA3339 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F449B0237AB76E00BA3339 /* MainViewController.m */; };
+		86F449B5237AB9A600BA3339 /* AudioUnitRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F449B3237AB9A600BA3339 /* AudioUnitRecordViewController.m */; };
+		86F449B6237AB9A600BA3339 /* AudioUnitRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F449B4237AB9A600BA3339 /* AudioUnitRecordViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,11 @@
 		8661982523289E9600E775D5 /* AudioUnitHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitHelper.m; sourceTree = "<group>"; };
 		86C890322322479700E70624 /* AudioQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioQueue.h; sourceTree = "<group>"; };
 		86C890332322479700E70624 /* AudioQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioQueue.m; sourceTree = "<group>"; };
+		86F449AF237AB76E00BA3339 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		86F449B0237AB76E00BA3339 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		86F449B2237AB9A600BA3339 /* AudioUnitRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitRecordViewController.h; sourceTree = "<group>"; };
+		86F449B3237AB9A600BA3339 /* AudioUnitRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitRecordViewController.m; sourceTree = "<group>"; };
+		86F449B4237AB9A600BA3339 /* AudioUnitRecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioUnitRecordViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 				118DB9AE232004D700C421E0 /* AppDelegate.h */,
 				118DB9AF232004D700C421E0 /* AppDelegate.m */,
 				118DB9B1232004D700C421E0 /* ViewController.h */,
+				86F449AE237AB6FC00BA3339 /* ViewControllers */,
 				118DB9B2232004D700C421E0 /* ViewController.m */,
 				118DB9C42320050B00C421E0 /* AudioRecorder.h */,
 				118DB9C52320050B00C421E0 /* AudioRecorder.m */,
@@ -122,6 +131,18 @@
 				86C890332322479700E70624 /* AudioQueue.m */,
 			);
 			path = AudioQueue;
+			sourceTree = "<group>";
+		};
+		86F449AE237AB6FC00BA3339 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				86F449AF237AB76E00BA3339 /* MainViewController.h */,
+				86F449B0237AB76E00BA3339 /* MainViewController.m */,
+				86F449B2237AB9A600BA3339 /* AudioUnitRecordViewController.h */,
+				86F449B3237AB9A600BA3339 /* AudioUnitRecordViewController.m */,
+				86F449B4237AB9A600BA3339 /* AudioUnitRecordViewController.xib */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				118DB9BB232004D900C421E0 /* LaunchScreen.storyboard in Resources */,
+				86F449B6237AB9A600BA3339 /* AudioUnitRecordViewController.xib in Resources */,
 				860EB448232A2D9200AEF97C /* DrumsMonoSTP.aif in Resources */,
 				118DB9B8232004D900C421E0 /* Assets.xcassets in Resources */,
 				118DB9B6232004D700C421E0 /* Main.storyboard in Resources */,
@@ -198,6 +220,8 @@
 				86C890342322479700E70624 /* AudioQueue.m in Sources */,
 				118DB9C92320055E00C421E0 /* AudioSessionTool.m in Sources */,
 				11227D222370762E00B24725 /* AudioSessionHelper.m in Sources */,
+				86F449B1237AB76E00BA3339 /* MainViewController.m in Sources */,
+				86F449B5237AB9A600BA3339 /* AudioUnitRecordViewController.m in Sources */,
 				118DB9B3232004D700C421E0 /* ViewController.m in Sources */,
 				8661982623289E9600E775D5 /* AudioUnitHelper.m in Sources */,
 				118DB9BE232004D900C421E0 /* main.m in Sources */,
