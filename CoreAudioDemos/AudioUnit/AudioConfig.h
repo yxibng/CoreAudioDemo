@@ -1,15 +1,16 @@
 //
-//  AudioUnitConfig.h
+//  AudioConfig.h
 //  CoreAudioDemos
 //
-//  Created by 姚晓丙 on 2019/11/4.
+//  Created by yxibng on 2019/11/13.
 //  Copyright © 2019 姚晓丙. All rights reserved.
 //
 
-#ifndef AudioUnitConfig_h
-#define AudioUnitConfig_h
-
+#import <Foundation/Foundation.h>
 @import AudioToolbox;
+@import CoreAudio;
+
+NS_ASSUME_NONNULL_BEGIN
 
 // A VP I/O unit's bus 1 connects to input hardware (microphone).
 static const AudioUnitElement kInputBus = 1;
@@ -25,4 +26,12 @@ static const double kAudioSampleRate = 44100.0;
  */
 static const double kIOBufferDuration = 0.005;
 
-#endif /* AudioUnitConfig_h */
+
+
+@interface AudioConfig : NSObject
+
++ (AudioStreamBasicDescription)audioStreamFormat;
++ (NSString *)writeFilePath;
+@end
+
+NS_ASSUME_NONNULL_END

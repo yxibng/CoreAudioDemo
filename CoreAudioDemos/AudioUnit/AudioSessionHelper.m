@@ -8,7 +8,7 @@
 
 #import "AudioSessionHelper.h"
 #import <AVFoundation/AVFoundation.h>
-#import "AudioUnitConfig.h"
+#import "AudioConfig.h"
 
 @implementation AudioSessionHelper
 

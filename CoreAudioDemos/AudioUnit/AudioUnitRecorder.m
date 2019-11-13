@@ -8,7 +8,7 @@
 
 #import "AudioUnitRecorder.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "AudioUnitConfig.h"
+#import "AudioConfig.h"
 
 @interface AudioUnitRecorder()
 {
@@ -29,6 +29,9 @@
     }
     AudioUnitUninitialize(_ioUnit);
     AudioComponentInstanceDispose(_ioUnit);
+    
+    NSLog(@"%s",__FUNCTION__);
+    
 }
 
 - (instancetype)initWithDelegate:(id<AudioUnitRecorderDelegate>)delegate
@@ -73,6 +76,7 @@
                                            &recordEnable,
                                            sizeof(recordEnable));
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
         return;
     }
     
@@ -85,6 +89,7 @@
                                   &playEnable,
                                   sizeof(playEnable));
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
         return;
     }
     
@@ -98,19 +103,12 @@
                                   sizeof(echoCancellationEnable));
     
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
         return;
     }
     
     //设置录音数据格式
-    AudioStreamBasicDescription format = {0};
-    format.mSampleRate = kAudioSampleRate;
-    format.mFormatID = kAudioFormatLinearPCM;
-    format.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-    format.mFramesPerPacket = 1;
-    format.mChannelsPerFrame = 1;
-    format.mBitsPerChannel = 16;
-    format.mBytesPerPacket = 2;
-    format.mBytesPerFrame = 2;
+    AudioStreamBasicDescription format = [AudioConfig audioStreamFormat];
     
     status = AudioUnitSetProperty(ioUnitInstance,
                          kAudioUnitProperty_StreamFormat,
@@ -119,6 +117,7 @@
                          &format,
                          sizeof(format));
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
         return;
     }
     //设置录音数据回调
@@ -127,11 +126,13 @@
     recordCallback.inputProcRefCon = (__bridge void * _Nullable)(self);
     status = AudioUnitSetProperty(ioUnitInstance, kAudioOutputUnitProperty_SetInputCallback, kAudioUnitScope_Global, kInputBus, &recordCallback, sizeof(recordCallback));
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
         return;
     }
     
     status = AudioUnitInitialize(ioUnitInstance);
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
         return;
     }
 }
@@ -147,9 +148,17 @@
     
     OSStatus status =  AudioOutputUnitStart(_ioUnit);
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
+        if ([self.delegate respondsToSelector:@selector(audioRecorder:didStartWithError:)]) {
+            [self.delegate audioRecorder:self didStartWithError:AudioUnitErrorCodeFailed];
+        }
         return;
     }
     _running = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(audioRecorder:didStartWithError:)]) {
+        [self.delegate audioRecorder:self didStartWithError:AudioUnitErrorCodeOK];
+    }
 }
 
 - (void)stopRecording
@@ -159,9 +168,15 @@
     }
     OSStatus status = AudioOutputUnitStop(_ioUnit);
     if (status != noErr) {
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
         return;
     }
     _running = NO;
+    
+    if ([self.delegate respondsToSelector:@selector(audioRecorder:didStopWithReason:)]) {
+        [self.delegate audioRecorder:self didStopWithReason:AudioUnitStopReasonUserTrigger];
+    }
+    
 }
 
 - (BOOL)running
@@ -192,6 +207,7 @@ OSStatus recordRenderCallback(void *inRefCon,
         }
     } else {
         //render error
+        NSLog(@"%s, line = %d, status = %d", __FUNCTION__, __LINE__, status);
 
     }
     return noErr;
