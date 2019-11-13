@@ -27,7 +27,7 @@ AudioStreamBasicDescription kAudioStreamFormat() {
 
 NSString *kAudioFileWritePath() {
     NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    NSString *fileName = @"audio.aif";
+    NSString *fileName = @"audio.caf";
     NSString *path = [documentPath stringByAppendingPathComponent:fileName];
     return path;
 }

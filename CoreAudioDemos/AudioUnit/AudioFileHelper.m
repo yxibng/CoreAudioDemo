@@ -37,7 +37,6 @@
     if (self = [super init]) {
         _filePath = filePath;
         _streamFormat = streamFormat;
-        [self setupForWritting];
     }
     return self;
 }
@@ -55,17 +54,12 @@
         return;
     }
     _startByte = 0;
+    _running = YES;
 }
 
 - (void)start
 {
-    NSURL *url = [NSURL fileURLWithPath:self.filePath];
-    OSStatus status = AudioFileOpenURL((__bridge CFURLRef _Nonnull)(url), kAudioFileWritePermission, kAudioFileCAFType, &(_fileID));
-    if (status != noErr) {
-        NSLog(@"%s status = %d", __FUNCTION__, status);
-        return;
-    }
-    _running = YES;
+    [self setupForWritting];
 }
 
 - (void)writeData:(void *)data size:(int)length
