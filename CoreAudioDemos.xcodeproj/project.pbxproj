@@ -19,9 +19,12 @@
 		118DB9C92320055E00C421E0 /* AudioSessionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 118DB9C82320055E00C421E0 /* AudioSessionTool.m */; };
 		860EB448232A2D9200AEF97C /* DrumsMonoSTP.aif in Resources */ = {isa = PBXBuildFile; fileRef = 860EB447232A2D9200AEF97C /* DrumsMonoSTP.aif */; };
 		8661982623289E9600E775D5 /* AudioUnitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8661982523289E9600E775D5 /* AudioUnitHelper.m */; };
+		86865144237D343B006FB1B0 /* AudioUnitPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 86865143237D343B006FB1B0 /* AudioUnitPlayer.m */; };
 		869DDB09237C05080054163F /* AudioFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DDB08237C05080054163F /* AudioFileHelper.m */; };
 		869DDB0C237C102E0054163F /* AudioConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 869DDB0B237C102E0054163F /* AudioConfig.m */; };
 		86C890342322479700E70624 /* AudioQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C890332322479700E70624 /* AudioQueue.m */; };
+		86DCDF3E237D3C0F006C6C0C /* AudioUnitPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DCDF3C237D3C0F006C6C0C /* AudioUnitPlayerViewController.m */; };
+		86DCDF3F237D3C0F006C6C0C /* AudioUnitPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86DCDF3D237D3C0F006C6C0C /* AudioUnitPlayerViewController.xib */; };
 		86F449B1237AB76E00BA3339 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F449B0237AB76E00BA3339 /* MainViewController.m */; };
 		86F449B5237AB9A600BA3339 /* AudioUnitRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86F449B3237AB9A600BA3339 /* AudioUnitRecordViewController.m */; };
 		86F449B6237AB9A600BA3339 /* AudioUnitRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F449B4237AB9A600BA3339 /* AudioUnitRecordViewController.xib */; };
@@ -50,12 +53,17 @@
 		860EB447232A2D9200AEF97C /* DrumsMonoSTP.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = DrumsMonoSTP.aif; sourceTree = "<group>"; };
 		8661982423289E9600E775D5 /* AudioUnitHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitHelper.h; sourceTree = "<group>"; };
 		8661982523289E9600E775D5 /* AudioUnitHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitHelper.m; sourceTree = "<group>"; };
+		86865142237D343B006FB1B0 /* AudioUnitPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitPlayer.h; sourceTree = "<group>"; };
+		86865143237D343B006FB1B0 /* AudioUnitPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitPlayer.m; sourceTree = "<group>"; };
 		869DDB07237C05080054163F /* AudioFileHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFileHelper.h; sourceTree = "<group>"; };
 		869DDB08237C05080054163F /* AudioFileHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFileHelper.m; sourceTree = "<group>"; };
 		869DDB0A237C102E0054163F /* AudioConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfig.h; sourceTree = "<group>"; };
 		869DDB0B237C102E0054163F /* AudioConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfig.m; sourceTree = "<group>"; };
 		86C890322322479700E70624 /* AudioQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioQueue.h; sourceTree = "<group>"; };
 		86C890332322479700E70624 /* AudioQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioQueue.m; sourceTree = "<group>"; };
+		86DCDF3B237D3C0F006C6C0C /* AudioUnitPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitPlayerViewController.h; sourceTree = "<group>"; };
+		86DCDF3C237D3C0F006C6C0C /* AudioUnitPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitPlayerViewController.m; sourceTree = "<group>"; };
+		86DCDF3D237D3C0F006C6C0C /* AudioUnitPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioUnitPlayerViewController.xib; sourceTree = "<group>"; };
 		86F449AF237AB76E00BA3339 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		86F449B0237AB76E00BA3339 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		86F449B2237AB9A600BA3339 /* AudioUnitRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitRecordViewController.h; sourceTree = "<group>"; };
@@ -120,8 +128,7 @@
 			children = (
 				8661982423289E9600E775D5 /* AudioUnitHelper.h */,
 				8661982523289E9600E775D5 /* AudioUnitHelper.m */,
-				11227D192370722D00B24725 /* AudioUnitRecorder.h */,
-				11227D1A2370722D00B24725 /* AudioUnitRecorder.m */,
+				86865145237D35FF006FB1B0 /* Recorder&Player */,
 				869DDB0A237C102E0054163F /* AudioConfig.h */,
 				869DDB0B237C102E0054163F /* AudioConfig.m */,
 				11227D202370762E00B24725 /* AudioSessionHelper.h */,
@@ -130,6 +137,17 @@
 				869DDB08237C05080054163F /* AudioFileHelper.m */,
 			);
 			path = AudioUnit;
+			sourceTree = "<group>";
+		};
+		86865145237D35FF006FB1B0 /* Recorder&Player */ = {
+			isa = PBXGroup;
+			children = (
+				86865142237D343B006FB1B0 /* AudioUnitPlayer.h */,
+				86865143237D343B006FB1B0 /* AudioUnitPlayer.m */,
+				11227D192370722D00B24725 /* AudioUnitRecorder.h */,
+				11227D1A2370722D00B24725 /* AudioUnitRecorder.m */,
+			);
+			path = "Recorder&Player";
 			sourceTree = "<group>";
 		};
 		86C890312322477700E70624 /* AudioQueue */ = {
@@ -149,6 +167,9 @@
 				86F449B2237AB9A600BA3339 /* AudioUnitRecordViewController.h */,
 				86F449B3237AB9A600BA3339 /* AudioUnitRecordViewController.m */,
 				86F449B4237AB9A600BA3339 /* AudioUnitRecordViewController.xib */,
+				86DCDF3B237D3C0F006C6C0C /* AudioUnitPlayerViewController.h */,
+				86DCDF3C237D3C0F006C6C0C /* AudioUnitPlayerViewController.m */,
+				86DCDF3D237D3C0F006C6C0C /* AudioUnitPlayerViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -210,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86DCDF3F237D3C0F006C6C0C /* AudioUnitPlayerViewController.xib in Resources */,
 				118DB9BB232004D900C421E0 /* LaunchScreen.storyboard in Resources */,
 				86F449B6237AB9A600BA3339 /* AudioUnitRecordViewController.xib in Resources */,
 				860EB448232A2D9200AEF97C /* DrumsMonoSTP.aif in Resources */,
@@ -236,8 +258,10 @@
 				118DB9C62320050B00C421E0 /* AudioRecorder.m in Sources */,
 				11227D1B2370722D00B24725 /* AudioUnitRecorder.m in Sources */,
 				869DDB0C237C102E0054163F /* AudioConfig.m in Sources */,
+				86865144237D343B006FB1B0 /* AudioUnitPlayer.m in Sources */,
 				869DDB09237C05080054163F /* AudioFileHelper.m in Sources */,
 				118DB9B0232004D700C421E0 /* AppDelegate.m in Sources */,
+				86DCDF3E237D3C0F006C6C0C /* AudioUnitPlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

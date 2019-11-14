@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "AudioUnitRecordViewController.h"
+#import "AudioUnitPlayerViewController.h"
 
 
 static NSString *cellIdentifier = @"cell";
@@ -42,15 +43,23 @@ static NSString *cellIdentifier = @"cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AudioUnitRecordViewController *vc = [AudioUnitRecordViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.row == 0) {
+        AudioUnitRecordViewController *vc = [AudioUnitRecordViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 1) {
+        AudioUnitPlayerViewController *vc = [AudioUnitPlayerViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+
 }
 
 
 
 - (NSArray *)items
 {
-    return @[@"Audio Unit record demo"];
+    return @[@"Audio Unit record demo",
+    @"Audio Unit play demo"];
 }
 
 @end

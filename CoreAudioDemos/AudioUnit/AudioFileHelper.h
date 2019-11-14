@@ -22,7 +22,11 @@ typedef struct {
 
 @interface AudioFileReader : NSObject
 @property (nonatomic, copy) NSString *filePath;
-- (instancetype)initWithFilePath:(NSString *)filePath;
+- (instancetype)initWithFilePath:(NSString *)filePath streamFormat:(AudioStreamBasicDescription)streamFormat;
+
+- (void)start;
+- (BOOL)readSoundTo:(void *)data size:(int)length;
+- (void)stop;
 
 @end
 

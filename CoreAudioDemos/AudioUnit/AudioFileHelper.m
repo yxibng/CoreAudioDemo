@@ -9,15 +9,64 @@
 #import "AudioFileHelper.h"
 #import <AudioToolbox/AudioToolbox.h>
 
+@interface AudioFileReader ()
+@property (nonatomic, assign) BOOL running;
+@property (nonatomic) AudioFileID fileID;
+@property (nonatomic) AudioStreamBasicDescription streamFormat;
+@property (nonatomic) UInt32 soundBytes;
+@property (nonatomic) UInt32 startBytes;
+@end
+
 @implementation AudioFileReader
 
-- (instancetype)initWithFilePath:(NSString *)filePath
+- (instancetype)initWithFilePath:(NSString *)filePath streamFormat:(AudioStreamBasicDescription)streamFormat
 {
     if (self = [super init]) {
         _filePath = filePath;
+        _streamFormat = streamFormat;
     }
     return self;
 }
+
+- (void)start
+{
+    NSURL *url = [NSURL fileURLWithPath:self.filePath];
+    OSStatus status = AudioFileOpenURL((__bridge CFURLRef _Nonnull)(url),
+                                       kAudioFileReadPermission,
+                                       kAudioFileCAFType,
+                                       &_fileID);
+    if (status != noErr) {
+        NSLog(@"%s status = %d", __FUNCTION__, (int)status);
+        return;
+    }
+    
+    _running = YES;
+}
+
+- (BOOL)readSoundTo:(void *)data size:(int)length
+{
+    if (!_running) {
+        return NO;
+    }
+    
+    OSStatus status =  AudioFileReadBytes(_fileID, TRUE, _startBytes, &length, data);
+    if (status != noErr) {
+        return NO;
+    }
+    _startBytes += length;
+    return YES;
+}
+
+
+- (void)stop
+{
+    OSStatus status = AudioFileClose(_fileID);
+    if (status != noErr) {
+        NSLog(@"%s status = %d", __FUNCTION__, (int)status);
+        return;
+    }
+}
+
 
 
 @end
@@ -50,7 +99,7 @@
                                              &_streamFormat,
                                              kAudioFileFlags_EraseFile, &(_fileID));
     if (status != noErr) {
-        NSLog(@"%s status = %d", __FUNCTION__, status);
+        NSLog(@"%s status = %d", __FUNCTION__, (int)status);
         return;
     }
     _startByte = 0;
